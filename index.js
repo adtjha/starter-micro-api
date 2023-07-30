@@ -19,6 +19,16 @@ db.once('open', () => {
     console.log('Connected to MongoDB');
 });
 
+// Routes
+const formRoutes = require('./routes/formRoutes');
+const questionRoutes = require('./routes/questionRoutes');
+const responseRoutes = require('./routes/responseRoutes');
+
+
+app.use('/api', formRoutes);
+app.use('/api', questionRoutes);
+app.use('/api', responseRoutes);
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
