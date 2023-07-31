@@ -1,64 +1,65 @@
 const express = require('express');
 const router = express.Router();
-const Form = require('../models/form');
+const Question = require('../models/question');
 
-// Create a new form
-router.post('/forms', async (req, res) => {
+// Create a new question
+router.post('/questions', async (req, res) => {
     try {
-        const { title, description, headerImage, questions } = req.body;
-        const form = await Form.create({ title, description, headerImage, questions });
-        res.status(201).json(form);
+        console.log(req.body)
+        const { type, content, image } = req.body;
+        const question = await Question.create({ type, content, image });
+        res.status(201).json(question);
     } catch (error) {
-        console.error(error)
-        res.status(500).json({ message: 'Failed to create the form.' });
+        console.error(error, req.body)
+        res.status(500).json({ message: 'Failed to create the question.' });
     }
 });
 
-// Get a list of all forms
-router.get('/forms', async (req, res) => {
+// Get a list of all questions in a form
+router.get('/questions', async (req, res) => {
     try {
-        const forms = await Form.find();
-        res.status(200).json(forms);
+        const questions = await Question.find();
+        res.status(200).json(questions);
     } catch (error) {
-        res.status(500).json({ message: 'Failed to get forms.' });
+        res.status(500).json({ message: 'Failed to get questions.' });
     }
 });
 
-// Get a specific form by ID
-router.get('/forms/:formId', async (req, res) => {
+// Get a specific question by ID
+router.get('/questions/:questionId', async (req, res) => {
     try {
-        const form = await Form.findById(req.params.formId);
-        if (!form) {
-            return res.status(404).json({ message: 'Form not found.' });
+        const question = await Question.findById(req.params.questionId);
+        if (!question) {
+            return res.status(404).json({ message: 'Question not found.' });
         }
-        res.status(200).json(form);
+        res.status(200).json(question);
     } catch (error) {
-        res.status(500).json({ message: 'Failed to get the form.' });
+        res.status(500).json({ message: 'Failed to get the question.' });
     }
 });
 
-// Update a specific form
-router.put('/forms/:formId', async (req, res) => {
+// Update a specific question
+router.put('/questions/:questionId', async (req, res) => {
     try {
-        const { title, description, headerImage } = req.body;
-        const updatedForm = await Form.findByIdAndUpdate(
-            req.params.formId,
-            { title, description, headerImage },
+        const { type, content, image } = req.body;
+        const updatedQuestion = await Question.findByIdAndUpdate(
+            req.params.questionId,
+            { type, content, image },
             { new: true }
         );
-        res.status(200).json(updatedForm);
+        res.status(200).json(updatedQuestion);
     } catch (error) {
-        res.status(500).json({ message: 'Failed to update the form.' });
+        res.status(500).json({ message: 'Failed to update the question.' });
     }
 });
 
-// Delete a specific form
-router.delete('/forms/:formId', async (req, res) => {
+// Delete a specific question
+router.delete('/questions/:questionId', async (req, res) => {
     try {
-        const deletedForm = await Form.findByIdAndDelete(req.params.formId);
-        res.status(200).json(deletedForm);
+        const deletedQuestion = await Question.findByIdAndDelete(req.params.questionId);
+        res.status(200).json(deletedQuestion);
     } catch (error) {
-        res.status(500).json({ message: 'Failed to delete the form.' });
+        res.status(500).json({ message: 'Failed to delete the question.' });
     }
 });
 

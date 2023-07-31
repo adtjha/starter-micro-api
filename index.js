@@ -11,7 +11,8 @@ app.use(express.json({ limit: '50mb' }));
 app.use(cors()); // Allow cross-origin requests
 
 // Database connection
-const MONGODB_URI = 'mongodb+srv://adtjha1:jAJ3DBjLG65KGp5r@formbuilder.2mlnin7.mongodb.net/'; // Replace with your MongoDB URI
+// const MONGODB_URI = `mongodb+srv://adtjha1:${process.env.MONGODB_PASS}@formbuilder.2mlnin7.mongodb.net/`; // Replace with your MongoDB URI
+const MONGODB_URI = `mongodb+srv://adtjha1:juQNoAzrPEHNqtU9trAWTQQANeOJsrhIsAGZM9yGHChixeUJH4GZQmSEMQj3seDT@formbuilder.2mlnin7.mongodb.net/`; // Replace with your MongoDB URI
 mongoose.connect(MONGODB_URI);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
