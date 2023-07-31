@@ -13,6 +13,10 @@ const formSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    formId: {
+        type: String,
+        required: true,
+    },
     questions: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Question',

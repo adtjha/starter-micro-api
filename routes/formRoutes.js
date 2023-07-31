@@ -5,8 +5,8 @@ const Form = require('../models/form');
 // Create a new form
 router.post('/forms', async (req, res) => {
     try {
-        const { title, description, headerImage, questions } = req.body;
-        const form = await Form.create({ title, description, headerImage, questions });
+        const { title, description, headerImage, questions, formId } = req.body;
+        const form = await Form.create({ title, description, headerImage, questions, formId });
         res.status(201).json(form);
     } catch (error) {
         console.error(error)
