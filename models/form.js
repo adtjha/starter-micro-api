@@ -9,9 +9,14 @@ const formSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    description: {
+        type: String,
+        required: false,
+    },
     questions: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Question',
+        required: true,
     }],
 }, { timestamps: true });
 

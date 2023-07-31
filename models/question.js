@@ -12,7 +12,7 @@ const questionSchema = new mongoose.Schema({
     },
     formId: {
         type: String,
-        required: false,
+        required: true,
     },
 }, { timestamps: true });
 

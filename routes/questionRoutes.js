@@ -6,8 +6,8 @@ const Question = require('../models/question');
 router.post('/questions', async (req, res) => {
     try {
         console.log(req.body)
-        const { type, content, image } = req.body;
-        const question = await Question.create({ type, content, image });
+        const { type, content, formId } = req.body;
+        const question = await Question.create({ type, content, formId });
         res.status(201).json(question);
     } catch (error) {
         console.error(error, req.body)
@@ -28,7 +28,7 @@ router.get('/questions', async (req, res) => {
 // Get a specific question by ID
 router.get('/questions/:questionId', async (req, res) => {
     try {
-        const question = await Question.findById(req.params.questionId);
+        const question = await Question.findById(req.params.formId);
         if (!question) {
             return res.status(404).json({ message: 'Question not found.' });
         }
