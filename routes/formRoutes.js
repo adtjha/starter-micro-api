@@ -27,7 +27,7 @@ router.get('/forms', async (req, res) => {
 // Get a specific form by ID
 router.get('/forms/:formId', async (req, res) => {
     try {
-        const form = await Form.findById(req.params.formId);
+        const form = await Form.find({ formId: req.params.formId }).exec();
         if (!form) {
             return res.status(404).json({ message: 'Form not found.' });
         }

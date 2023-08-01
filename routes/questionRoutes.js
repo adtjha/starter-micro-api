@@ -28,7 +28,7 @@ router.get('/questions', async (req, res) => {
 // Get a specific question by ID
 router.get('/questions/:formId', async (req, res) => {
     try {
-        const question = await Question.findById(req.params.formId);
+        const question = await Question.find({ formId: req.params.formId }).exec();
         if (!question) {
             return res.status(404).json({ message: 'Question not found.' });
         }
