@@ -26,7 +26,7 @@ router.get('/questions', async (req, res) => {
 });
 
 // Get a specific question by ID
-router.get('/questions/:questionId', async (req, res) => {
+router.get('/questions/:formId', async (req, res) => {
     try {
         const question = await Question.findById(req.params.formId);
         if (!question) {
@@ -37,6 +37,7 @@ router.get('/questions/:questionId', async (req, res) => {
         res.status(500).json({ message: 'Failed to get the question.' });
     }
 });
+
 
 // Update a specific question
 router.put('/questions/:questionId', async (req, res) => {
